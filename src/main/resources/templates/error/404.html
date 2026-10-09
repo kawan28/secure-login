@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/base}">
+<head><title>Página não encontrada</title></head>
+<body>
+<section layout:fragment="content" class="error-page">
+    <p class="error-code">404</p>
+    <h1>Página não encontrada</h1>
+    <p class="muted">O endereço que você tentou acessar não existe.</p>
+    <a class="btn" th:href="@{/}">Voltar ao início</a>
+</section>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/base}">
+<head><title>Painel</title></head>
+<body>
+<section layout:fragment="content">
+    <h1>Olá, <span th:text="${user.name}">Usuário</span>!</h1>
+    <p class="muted">
+        Seus perfis:
+        <span th:each="r : ${user.roles}" class="badge" th:text="${r.label}">Perfil</span>
+        · Último acesso: <span th:text="${@ui.format(user.lastLoginAt)}">—</span>
+    </p>
+
+    <!-- Cada cartão aparece apenas para quem tem o perfil adequado.
+         Atenção: esconder o link NÃO é a proteção; quem protege é o SecurityConfig. -->
+    <div class="grid-3">
+        <a class="card card-link" th:href="@{/usuario/perfil}">
+            <h3>Meu perfil</h3>
+            <p>Veja seus dados e altere sua senha.</p>
+            <span class="badge">Todos os perfis</span>
+        </a>
+        <a class="card card-link" sec:authorize="hasAnyRole('MANAGER','ADMIN')" th:href="@{/gestao}">
+            <h3>Gestão</h3>
+            <p>Indicadores e funcionalidades intermediárias.</p>
+            <span class="badge">Gestor · Administrador</span>
+        </a>
+        <a class="card card-link" sec:authorize="hasRole('ADMIN')" th:href="@{/admin/usuarios}">
+            <h3>Administração</h3>
+            <p>Gerencie usuários, perfis e contas bloqueadas.</p>
+            <span class="badge">Administrador</span>
+        </a>
+    </div>
+</section>
+</body>
+</html>

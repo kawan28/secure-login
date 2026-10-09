@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/base}">
+<head><title>Usuários</title></head>
+<body>
+<section layout:fragment="content">
+    <h1>Gerenciar usuários</h1>
+    <p class="muted">Alterações de perfil ou desativação encerram as sessões ativas do usuário afetado.</p>
+
+    <div class="table-wrap card">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Usuário</th>
+                <th>Situação</th>
+                <th>Perfis</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="u : ${users}">
+                <td>
+                    <strong th:text="${u.name}">Nome</strong><br>
+                    <small class="muted" th:text="${u.email}">email</small><br>
+                    <small class="muted">Último acesso: <span th:text="${@ui.format(u.lastLoginAt)}">—</span></small>
+                </td>
+                <td>
+                    <span th:if="${u.enabled}" class="badge badge-ok">Ativa</span>
+                    <span th:unless="${u.enabled}" class="badge badge-off">Desativada</span>
+                    <span th:if="${u.locked}" class="badge badge-warn">Bloqueada</span>
+                </td>
+                <td>
+                    <!-- Um checkbox por perfil existente no enum Role: novos perfis aparecem automaticamente -->
+                    <form th:action="@{/admin/usuarios/{id}/perfis(id=${u.id})}" method="post" class="roles-form">
+                        <label th:each="r : ${allRoles}" class="check">
+                            <input type="checkbox" name="roles" th:value="${r.name()}" th:checked="${u.roles.contains(r)}">
+                            <span th:text="${r.label}">Perfil</span>
+                        </label>
+                        <button type="submit" class="btn btn-small">Salvar</button>
+                    </form>
+                </td>
+                <td class="actions-cell">
+                    <form th:if="${u.enabled}" th:action="@{/admin/usuarios/{id}/desativar(id=${u.id})}" method="post">
+                        <button type="submit" class="btn btn-small btn-danger">Desativar</button>
+                    </form>
+                    <form th:unless="${u.enabled}" th:action="@{/admin/usuarios/{id}/ativar(id=${u.id})}" method="post">
+                        <button type="submit" class="btn btn-small btn-outline">Ativar</button>
+                    </form>
+                    <form th:if="${u.locked}" th:action="@{/admin/usuarios/{id}/desbloquear(id=${u.id})}" method="post">
+                        <button type="submit" class="btn btn-small btn-outline">Desbloquear</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+</body>
+</html>

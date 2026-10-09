@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+  LAYOUT BASE (Thymeleaf Layout Dialect)
+  Todas as páginas "decoram" este arquivo com layout:decorate="~{layouts/base}"
+  e preenchem apenas o bloco layout:fragment="content".
+
+  Para mudar a "cara" do sistema no PFC:
+   1) troque cores/fontes em static/themes/<tema>/theme.css; ou
+   2) crie templates/themes/<tema>/layouts/base.html para sobrescrever este layout.
+  Nenhum controller precisa ser alterado.
+-->
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Título: "<título da página> · <nome da aplicação>" -->
+    <title layout:title-pattern="$CONTENT_TITLE · $LAYOUT_TITLE" th:text="${@ui.appName}">Secure Login</title>
+    <!-- Estrutura (layout) é comum; o tema define apenas cores, fontes e detalhes visuais -->
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{${@ui.cssPath}}">
+</head>
+<body th:classappend="'theme-' + ${@ui.themeName}">
+
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="container">
+    <div th:replace="~{fragments/messages :: messages}"></div>
+    <section layout:fragment="content">Conteúdo da página</section>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

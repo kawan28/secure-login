@@ -1,0 +1,29 @@
+/* Tema "escuro". Ative com APP_THEME=escuro. Mesmas variáveis, outros valores. */
+:root {
+    --font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+    --radius: 10px;
+    --shadow: 0 2px 8px rgba(0, 0, 0, .4);
+
+    --color-bg: #0f172a;
+    --color-surface: #1e293b;
+    --color-text: #e2e8f0;
+    --color-muted: #94a3b8;
+    --color-border: #334155;
+    --color-input-bg: #0f172a;
+
+    --color-primary: #22d3ee;
+    --color-on-primary: #0f172a;
+
+    --color-header-bg: #020617;
+    --color-header-text: #e2e8f0;
+
+    --color-badge-bg: #164e63;
+    --color-badge-text: #a5f3fc;
+
+    --color-success: #86efac;
+    --color-success-bg: #14532d;
+    --color-danger: #fca5a5;
+    --color-danger-bg: #7f1d1d;
+    --color-warn: #fde68a;
+    --color-warn-bg: #78350f;
+}

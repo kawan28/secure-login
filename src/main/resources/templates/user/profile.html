@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/base}">
+<head><title>Meu perfil</title></head>
+<body>
+<section layout:fragment="content">
+    <h1>Meu perfil</h1>
+
+    <div class="grid-2">
+        <div class="card">
+            <h2>Dados da conta</h2>
+            <dl class="details">
+                <dt>Nome</dt><dd th:text="${user.name}">Nome</dd>
+                <dt>E-mail</dt><dd th:text="${user.email}">email</dd>
+                <dt>Perfis</dt>
+                <dd><span th:each="r : ${user.roles}" class="badge" th:text="${r.label}">Perfil</span></dd>
+                <dt>Conta criada em</dt><dd th:text="${@ui.format(user.createdAt)}">—</dd>
+                <dt>Último acesso</dt><dd th:text="${@ui.format(user.lastLoginAt)}">—</dd>
+            </dl>
+        </div>
+
+        <div class="card">
+            <h2>Alterar senha</h2>
+            <form th:action="@{/usuario/senha}" th:object="${passwordForm}" method="post" class="form" novalidate>
+                <!-- Erros globais (ex.: "senha atual incorreta") -->
+                <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-error" role="alert">
+                    <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">erro</p>
+                </div>
+
+                <label for="currentPassword">Senha atual</label>
+                <input type="password" th:field="*{currentPassword}" autocomplete="current-password" maxlength="64">
+                <small class="field-error" th:if="${#fields.hasErrors('currentPassword')}" th:errors="*{currentPassword}"></small>
+
+                <label for="password">Nova senha</label>
+                <input type="password" th:field="*{password}" autocomplete="new-password" maxlength="64">
+                <small class="field-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
+
+                <label for="confirmPassword">Confirmar nova senha</label>
+                <input type="password" th:field="*{confirmPassword}" autocomplete="new-password" maxlength="64">
+                <small class="field-error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></small>
+
+                <button type="submit" class="btn">Salvar nova senha</button>
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>

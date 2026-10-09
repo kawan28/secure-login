@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base}">
+<head><title>Criar conta</title></head>
+<body>
+<section layout:fragment="content" class="auth-box card">
+    <h1>Criar conta</h1>
+
+    <!-- th:object/th:field ligam o formulário ao RegistrationForm; th:errors mostra a validação do servidor -->
+    <form th:action="@{/cadastro}" th:object="${form}" method="post" class="form" novalidate>
+        <label for="name">Nome</label>
+        <input type="text" th:field="*{name}" maxlength="100" autocomplete="name"
+               th:classappend="${#fields.hasErrors('name')} ? 'invalid'">
+        <small class="field-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
+
+        <label for="email">E-mail</label>
+        <input type="email" th:field="*{email}" maxlength="150" autocomplete="email"
+               th:classappend="${#fields.hasErrors('email')} ? 'invalid'">
+        <small class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+
+        <label for="password">Senha</label>
+        <input type="password" th:field="*{password}" maxlength="64" autocomplete="new-password"
+               th:classappend="${#fields.hasErrors('password')} ? 'invalid'">
+        <small class="hint">Mínimo de 8 caracteres, com maiúscula, minúscula, número e caractere especial.</small>
+        <small class="field-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
+
+        <label for="confirmPassword">Confirmar senha</label>
+        <input type="password" th:field="*{confirmPassword}" maxlength="64" autocomplete="new-password"
+               th:classappend="${#fields.hasErrors('confirmPassword')} ? 'invalid'">
+        <small class="field-error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></small>
+
+        <button type="submit" class="btn btn-block">Cadastrar</button>
+    </form>
+
+    <p class="muted center">Já tem conta? <a th:href="@{/login}">Entrar</a></p>
+</section>
+</body>
+</html>

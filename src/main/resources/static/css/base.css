@@ -1,0 +1,139 @@
+/* =====================================================================
+   base.css — ESTRUTURA visual comum a todos os temas.
+   Usa apenas variáveis CSS (--cor-*, --fonte...). As variáveis são
+   definidas em /themes/<tema>/theme.css. Para criar um tema novo,
+   copie um theme.css e mude os valores; este arquivo não precisa mudar.
+   ===================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-family);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-text);
+    background: var(--color-bg);
+}
+
+a { color: var(--color-primary); }
+h1, h2, h3 { line-height: 1.2; margin: 0 0 .6em; }
+h1 { font-size: 1.8rem; }
+h2 { font-size: 1.25rem; }
+h3 { font-size: 1.05rem; }
+
+.container { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+main.container { flex: 1; padding-top: 32px; padding-bottom: 48px; }
+
+/* ---------- Cabeçalho / rodapé ---------- */
+.site-header { background: var(--color-header-bg); border-bottom: 1px solid var(--color-border); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; flex-wrap: wrap; }
+.brand { font-weight: 700; font-size: 1.15rem; text-decoration: none; color: var(--color-header-text); }
+.nav { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.nav a { color: var(--color-header-text); text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+.nav-user { color: var(--color-muted); font-size: .9rem; }
+.inline-form { display: inline; margin: 0; }
+.site-footer { padding: 20px 0; border-top: 1px solid var(--color-border); color: var(--color-muted); }
+
+/* ---------- Componentes ---------- */
+.card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+}
+.card-link { display: block; text-decoration: none; color: inherit; transition: transform .15s; }
+.card-link:hover { transform: translateY(-2px); border-color: var(--color-primary); }
+
+.btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius);
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn-outline { background: transparent; color: var(--color-primary); }
+.btn-danger { background: var(--color-danger); border-color: var(--color-danger); color: #fff; }
+.btn-small { padding: 6px 12px; font-size: .875rem; }
+.btn-block { width: 100%; margin-top: 8px; }
+
+.badge {
+    display: inline-block;
+    padding: 2px 10px;
+    margin: 2px 4px 2px 0;
+    border-radius: 999px;
+    font-size: .78rem;
+    font-weight: 600;
+    background: var(--color-badge-bg);
+    color: var(--color-badge-text);
+}
+.badge-ok { background: var(--color-success-bg); color: var(--color-success); }
+.badge-off { background: var(--color-danger-bg); color: var(--color-danger); }
+.badge-warn { background: var(--color-warn-bg); color: var(--color-warn); }
+
+.alert { padding: 12px 16px; border-radius: var(--radius); margin-bottom: 16px; }
+.alert p { margin: 0; }
+.alert-success { background: var(--color-success-bg); color: var(--color-success); }
+.alert-error { background: var(--color-danger-bg); color: var(--color-danger); }
+
+/* ---------- Formulários ---------- */
+.form { display: flex; flex-direction: column; gap: 6px; }
+.form label { font-weight: 600; margin-top: 10px; }
+.form input {
+    padding: 10px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-input-bg);
+    color: var(--color-text);
+    font: inherit;
+}
+.form input:focus { outline: 2px solid var(--color-primary); outline-offset: 1px; }
+.form input.invalid { border-color: var(--color-danger); }
+.field-error { color: var(--color-danger); }
+.hint, .muted { color: var(--color-muted); }
+.center { text-align: center; }
+
+.auth-box { max-width: 440px; margin: 0 auto; }
+
+/* ---------- Layouts de página ---------- */
+.hero { text-align: center; }
+.hero h1 { font-size: 2.4rem; }
+.lead { font-size: 1.15rem; color: var(--color-muted); max-width: 620px; margin: 0 auto 24px; }
+.actions { display: flex; gap: 12px; justify-content: center; margin-bottom: 40px; flex-wrap: wrap; }
+.hero .grid-3 { text-align: left; }
+
+.grid-2, .grid-3, .grid-4 { display: grid; gap: 20px; margin-top: 20px; }
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.grid-4 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+
+.stat { display: flex; flex-direction: column; gap: 4px; }
+.stat-value { font-size: 2rem; font-weight: 700; color: var(--color-primary); }
+.stat-label { color: var(--color-muted); }
+
+.details { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; margin: 0; }
+.details dt { font-weight: 600; }
+.details dd { margin: 0; }
+
+/* ---------- Tabela (admin) ---------- */
+.table-wrap { overflow-x: auto; padding: 0; }
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { padding: 12px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--color-border); }
+.table th { font-size: .85rem; text-transform: uppercase; color: var(--color-muted); }
+.roles-form { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 0; }
+.check { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.actions-cell form { margin: 0 0 6px; }
+
+/* ---------- Páginas de erro ---------- */
+.error-page { text-align: center; padding-top: 40px; }
+.error-code { font-size: 4rem; font-weight: 800; margin: 0; color: var(--color-primary); }

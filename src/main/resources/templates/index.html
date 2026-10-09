@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/base}">
+<head><title>Início</title></head>
+<body>
+<section layout:fragment="content" class="hero">
+    <h1 th:text="${@ui.appName}">Secure Login</h1>
+    <p class="lead">Sistema de autenticação e autorização com perfis de acesso,
+        pronto para ser adaptado ao seu projeto.</p>
+
+    <div class="actions" sec:authorize="isAnonymous()">
+        <a class="btn" th:href="@{/login}">Entrar</a>
+        <a class="btn btn-outline" th:href="@{/cadastro}">Criar conta</a>
+    </div>
+    <div class="actions" sec:authorize="isAuthenticated()">
+        <a class="btn" th:href="@{/painel}">Ir para o painel</a>
+    </div>
+
+    <div class="grid-3">
+        <div class="card"><h3>Senhas protegidas</h3><p>Hash BCrypt com salt e política de senha forte.</p></div>
+        <div class="card"><h3>3 perfis de acesso</h3><p>Usuário, Gestor e Administrador com rotas protegidas.</p></div>
+        <div class="card"><h3>MongoDB Atlas</h3><p>Usuários e sessões armazenados na nuvem com TLS.</p></div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<!--
+  EXEMPLO DE SOBRESCRITA DE TEMPLATE
+  Este arquivo só é usado quando app.theme.name=escuro. Ele substitui
+  templates/fragments/footer.html sem alterar nenhum outro arquivo.
+-->
+<footer th:fragment="footer" class="site-footer" xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <small><span th:text="${@ui.appName}">Secure Login</span> · tema escuro</small>
+    </div>
+</footer>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/base}">
+<head><title>Gestão</title></head>
+<body>
+<section layout:fragment="content">
+    <h1>Área de gestão</h1>
+    <p class="muted">Acessível pelos perfis <strong>Gestor</strong> e <strong>Administrador</strong>.
+        Substitua este conteúdo pelas funcionalidades do seu PFC.</p>
+
+    <div class="grid-4">
+        <div class="card stat">
+            <span class="stat-value" th:text="${totalUsers}">0</span>
+            <span class="stat-label">Usuários cadastrados</span>
+        </div>
+        <div class="card stat" th:each="entry : ${usersByRole}">
+            <span class="stat-value" th:text="${entry.value}">0</span>
+            <span class="stat-label" th:text="${entry.key.label}">Perfil</span>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<!-- Mensagens "flash" enviadas pelos controllers via RedirectAttributes -->
+<div th:fragment="messages" xmlns:th="http://www.thymeleaf.org">
+    <div th:if="${successMessage}" class="alert alert-success" role="status" th:text="${successMessage}"></div>
+    <div th:if="${errorMessage}" class="alert alert-error" role="alert" th:text="${errorMessage}"></div>
+</div>
